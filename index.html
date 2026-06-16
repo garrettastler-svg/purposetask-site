@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PurposeTask</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       PURPOSETASK — DESIGN TOKENS (Airbnb editorial + PT overrides)
+       ============================================================ */
+    :root {
+      --color-ink:        #2C2A26;
+      --color-canvas:     #ffffff;
+      --color-band:       #f5f1e9;
+      --color-wash:       #ebebeb;
+      --color-fog:        #6a6a6a;
+      --color-gold:       #9B7D2E;
+
+      --font-body: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* Type scale */
+      --text-display:     clamp(36px, 6vw, 72px);
+      --text-heading:     clamp(28px, 4vw, 48px);
+      --text-subheading:  22px;
+      --text-body:        18px;
+      --text-caption:     14px;
+      --text-copyright:   12px;
+
+      /* Leading */
+      --leading-display:  1.13;
+      --leading-heading:  1.18;
+      --leading-body:     1.56;
+      --leading-sub:      1.33;
+
+      /* Tracking */
+      --tracking-display: -0.03em;
+      --tracking-heading: -0.02em;
+      --tracking-sub:     -0.01em;
+
+      /* Spacing */
+      --space-8:  8px;
+      --space-16: 16px;
+      --space-24: 24px;
+      --space-32: 32px;
+      --space-40: 40px;
+      --space-48: 48px;
+      --space-64: 64px;
+
+      /* Layout */
+      --page-max:    1200px;
+      --copy-max:    640px;
+      --section-gap: 64px;
+
+      /* Radius */
+      --radius-btn:   8px;
+      --radius-media: 12px;
+    }
+
+    /* ============================================================
+       BASE RESET
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      -webkit-text-size-adjust: none;
+      text-size-adjust: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: var(--text-body);
+      color: var(--color-ink);
+      background: var(--color-canvas);
+      line-height: var(--leading-body);
+    }
+
+    img, video, iframe { display: block; max-width: 100%; }
+    input, button, textarea, select { font: inherit; color: inherit; }
+    h1, h2, h3, h4 { text-wrap: balance; }
+    p { text-wrap: pretty; }
+
+    :focus-visible {
+      outline: 2px solid var(--color-gold);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* ============================================================
+       SKIP LINK
+       ============================================================ */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: var(--space-16);
+      background: var(--color-ink);
+      color: #ffffff;
+      padding: var(--space-8) var(--space-16);
+      border-radius: var(--radius-btn);
+      font-size: var(--text-caption);
+      font-weight: 700;
+      z-index: 9999;
+      text-decoration: none;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: var(--space-16); }
+
+    /* ============================================================
+       SHARED LAYOUT HELPERS
+       ============================================================ */
+    .container {
+      max-width: var(--page-max);
+      margin-inline: auto;
+      padding-inline: var(--space-40);
+    }
+
+    .section-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: var(--space-24);
+    }
+
+    .section-headline {
+      font-size: var(--text-heading);
+      font-weight: 700;
+      line-height: var(--leading-heading);
+      letter-spacing: var(--tracking-heading);
+      color: var(--color-ink);
+    }
+
+    .section-subtext {
+      font-size: var(--text-body);
+      font-weight: 400;
+      line-height: var(--leading-body);
+      color: var(--color-ink);
+      max-width: var(--copy-max);
+    }
+
+    /* ============================================================
+       CTA BUTTON
+       ============================================================ */
+    .btn-cta {
+      display: inline-block;
+      background: var(--color-ink);
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1;
+      padding: 14px 24px;
+      border-radius: var(--radius-btn);
+      border: none;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+      white-space: nowrap;
+    }
+    .btn-cta:hover { opacity: 0.85; }
+    .btn-cta:active { opacity: 0.7; }
+
+    /* ============================================================
+       1. NAVIGATION
+       ============================================================ */
+    #site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-canvas);
+      border-bottom: 1px solid var(--color-ink);
+    }
+
+    .nav-inner {
+      max-width: var(--page-max);
+      margin-inline: auto;
+      padding-inline: var(--space-40);
+      padding-block: var(--space-40);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .wordmark {
+      font-size: 20px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--color-gold);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-8);
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--color-ink);
+      border-radius: 2px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .nav-hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      top: 73px;
+      background: var(--color-canvas);
+      z-index: 99;
+      padding: var(--space-40);
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-24);
+    }
+    .nav-overlay.open { display: flex; }
+
+    /* ============================================================
+       2. HERO
+       ============================================================ */
+    #hero {
+      background: var(--color-canvas);
+      padding-block: var(--section-gap);
+    }
+
+    .hero-headline {
+      font-size: var(--text-display);
+      font-weight: 700;
+      line-height: var(--leading-display);
+      letter-spacing: var(--tracking-display);
+      color: var(--color-ink);
+      max-width: 800px;
+    }
+
+    .hero-subtext {
+      font-size: var(--text-body);
+      font-weight: 400;
+      line-height: var(--leading-body);
+      color: var(--color-ink);
+      max-width: var(--copy-max);
+    }
+
+    /* ============================================================
+       3. TEASER VIDEO
+       ============================================================ */
+    #video-section {
+      background: var(--color-canvas);
+      padding-block: 0 var(--section-gap);
+    }
+
+    .video-wrapper {
+      max-width: var(--page-max);
+      margin-inline: auto;
+      padding-inline: var(--space-40);
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: var(--radius-media);
+      border: 1px solid var(--color-ink);
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: var(--radius-media);
+    }
+
+    /* ============================================================
+       4. THE SHIFT (Band)
+       ============================================================ */
+    #the-shift {
+      background: var(--color-band);
+      padding-block: var(--section-gap);
+    }
+
+    /* ============================================================
+       5. THE GAP (Canvas)
+       ============================================================ */
+    #the-gap {
+      background: var(--color-canvas);
+      padding-block: var(--section-gap);
+    }
+
+    /* ============================================================
+       6. THE MODEL — THREE ROLES (Band)
+       ============================================================ */
+    #the-model {
+      background: var(--color-band);
+      padding-block: var(--section-gap);
+    }
+
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-24);
+      width: 100%;
+      margin-top: var(--space-8);
+    }
+
+    .persona-block {
+      background: var(--color-canvas);
+      border-radius: var(--radius-media);
+      padding: var(--space-24);
+      text-align: left;
+    }
+
+    .persona-label {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--color-ink);
+      margin-bottom: var(--space-8);
+      letter-spacing: var(--tracking-sub);
+      line-height: var(--leading-sub);
+    }
+
+    .persona-body {
+      font-size: var(--text-body);
+      font-weight: 400;
+      color: var(--color-fog);
+      line-height: var(--leading-body);
+    }
+
+    /* ============================================================
+       7. THE THESIS (Canvas)
+       ============================================================ */
+    #the-thesis {
+      background: var(--color-canvas);
+      padding-block: var(--section-gap);
+    }
+
+    .thesis-closer {
+      font-size: var(--text-subheading);
+      font-weight: 500;
+      color: var(--color-ink);
+      line-height: var(--leading-sub);
+      letter-spacing: var(--tracking-sub);
+      margin-top: var(--space-32);
+    }
+
+    /* ============================================================
+       8. CONTACT FORM (Band)
+       ============================================================ */
+    #contact {
+      background: var(--color-band);
+      padding-block: var(--section-gap);
+    }
+
+    .contact-form {
+      width: 100%;
+      max-width: var(--copy-max);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-16);
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+
+    .form-field label {
+      font-size: var(--text-caption);
+      font-weight: 700;
+      color: var(--color-ink);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      background: var(--color-canvas);
+      border: 1px solid var(--color-ink);
+      border-radius: var(--radius-btn);
+      padding: 14px 16px;
+      font-size: var(--text-body);
+      font-weight: 400;
+      color: var(--color-ink);
+      line-height: var(--leading-body);
+      transition: border-color 0.15s ease;
+      resize: vertical;
+    }
+
+    .form-field input::placeholder,
+    .form-field textarea::placeholder {
+      color: var(--color-fog);
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      outline: none;
+      border-color: var(--color-gold);
+      box-shadow: 0 0 0 2px rgba(155, 125, 46, 0.18);
+    }
+
+    .form-submit {
+      margin-top: var(--space-8);
+    }
+
+    /* ============================================================
+       9. FOOTER
+       ============================================================ */
+    #site-footer {
+      background: #2C2A26;
+      padding-block: var(--section-gap);
+      color: var(--color-fog);
+    }
+
+    .footer-inner {
+      max-width: var(--page-max);
+      margin-inline: auto;
+      padding-inline: var(--space-40);
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-32);
+    }
+
+    .footer-wordmark {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+    }
+
+    .footer-domain {
+      font-size: var(--text-body);
+      font-weight: 400;
+      color: var(--color-fog);
+    }
+
+    .footer-legal {
+      font-size: var(--text-caption);
+      line-height: 1.6;
+      color: var(--color-fog);
+      text-align: center;
+      max-width: 680px;
+      margin-inline: auto;
+      margin-bottom: var(--space-16);
+    }
+
+    .footer-copyright {
+      font-size: var(--text-copyright);
+      color: var(--color-fog);
+      text-align: center;
+    }
+
+    /* ============================================================
+       MOBILE RESPONSIVE — 900px
+       ============================================================ */
+    @media (max-width: 900px) {
+      .persona-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-inner { padding-block: var(--space-24); }
+
+      .footer-top { flex-direction: column; gap: var(--space-16); align-items: flex-start; }
+    }
+
+    /* ============================================================
+       MOBILE RESPONSIVE — 640px
+       ============================================================ */
+    @media (max-width: 640px) {
+      .container { padding-inline: var(--space-24); }
+      .video-wrapper { padding-inline: var(--space-24); }
+      .nav-inner { padding-inline: var(--space-24); padding-block: var(--space-24); }
+      .footer-inner { padding-inline: var(--space-24); }
+
+      .nav-hamburger { display: flex; }
+
+      .nav-cta-desktop { display: none; }
+
+      .persona-block { text-align: left; }
+
+      .btn-cta { width: 100%; text-align: center; }
+
+      .footer-top { flex-direction: column; gap: var(--space-16); align-items: flex-start; }
+    }
+
+    @media (min-width: 641px) {
+      .nav-hamburger { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip to content -->
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- ============================================================
+       1. NAVIGATION
+       ============================================================ -->
+  <header id="site-nav">
+    <nav class="nav-inner" aria-label="PurposeTask navigation">
+      <a class="wordmark" href="/">PurposeTask</a>
+      <a class="btn-cta nav-cta-desktop" href="#contact">Get in touch</a>
+      <button
+        class="nav-hamburger"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="nav-overlay"
+        id="hamburger-btn"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile nav overlay -->
+  <div id="nav-overlay" class="nav-overlay" role="dialog" aria-modal="true" aria-label="Navigation">
+    <a class="btn-cta" href="#contact" id="nav-overlay-link">Get in touch</a>
+  </div>
+
+  <!-- ============================================================
+       MAIN
+       ============================================================ -->
+  <main id="main-content">
+
+    <!-- 2. HERO -->
+    <section id="hero" aria-label="Hero">
+      <div class="container">
+        <div class="section-inner">
+          <h1 class="hero-headline">Where capacity finds purpose, and purpose finds momentum.</h1>
+          <p class="hero-subtext">PurposeTask is building civic infrastructure connecting displaced workers, nonprofits, and mission-driven donors to verified community outcomes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TEASER VIDEO -->
+    <section id="video-section" aria-label="PurposeTask teaser video">
+      <div class="video-wrapper">
+        <div class="video-container">
+          <iframe
+            src="https://www.youtube.com/embed/T7HTqmNeLks"
+            title="PurposeTask teaser video"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. THE SHIFT -->
+    <section id="the-model" aria-label="The model">
+      <div class="container">
+        <div class="section-inner">
+          <h2 class="section-headline">A simple model for useful work.</h2>
+          <div class="persona-grid">
+            <div class="persona-block">
+              <p class="persona-label">Taskers</p>
+              <p class="persona-body">People with available capacity who complete skills-matched community tasks and receive same-day payment.</p>
+            </div>
+            <div class="persona-block">
+              <p class="persona-label">Architects</p>
+              <p class="persona-body">Nonprofits and community organizations that define what needs doing and help verify completed work.</p>
+            </div>
+            <div class="persona-block">
+              <p class="persona-label">Sustainers</p>
+              <p class="persona-body">Funders who support verified outcomes with full visibility into where their dollars went and what work got done.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+    
+
+    <!-- 7. THE THESIS -->
+    <section id="the-thesis" aria-label="The thesis">
+      <div class="container">
+        <div class="section-inner">
+          <h2 class="section-headline">Trust is built when the work gets done.</h2>
+          <p class="section-subtext">PurposeTask is designed around scoped tasks, verified completion, fast worker payment, and transparent fund routing. The goal is to make useful work easier to fund, complete, and trust.</p>
+          <p class="thesis-closer">Task completed. Worker paid. Dollars accounted for.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. CONTACT FORM -->
+    <section id="contact" aria-label="Contact PurposeTask">
+      <div class="container">
+        <div class="section-inner">
+          <h2 class="section-headline">If this belongs in your world, reach out.</h2>
+          <p class="section-subtext">We're beginning with focused conversations across community organizations, funders, civic leaders, and builders.</p>
+          <form
+            class="contact-form"
+            action="mailto:info@purposetask.com"
+            method="POST"
+            enctype="text/plain"
+            aria-label="Contact form"
+          >
+            <div class="form-field">
+              <label for="field-name">Name <span aria-hidden="true">*</span></label>
+              <input
+                type="text"
+                id="field-name"
+                name="Name"
+                required
+                autocomplete="name"
+                placeholder="Your name"
+              >
+            </div>
+            <div class="form-field">
+              <label for="field-email">Email <span aria-hidden="true">*</span></label>
+              <input
+                type="email"
+                id="field-email"
+                name="Email"
+                required
+                autocomplete="email"
+                placeholder="you@organization.org"
+              >
+            </div>
+            <div class="form-field">
+              <label for="field-org">Organization</label>
+              <input
+                type="text"
+                id="field-org"
+                name="Organization"
+                autocomplete="organization"
+                placeholder="Your organization (optional)"
+              >
+            </div>
+            <div class="form-field">
+              <label for="field-message">Message</label>
+              <textarea
+                id="field-message"
+                name="Message"
+                rows="5"
+                placeholder="Tell us how you'd like to be involved"
+              ></textarea>
+            </div>
+            <div class="form-submit">
+              <button type="submit" class="btn-cta">Get in touch</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       9. FOOTER
+       ============================================================ -->
+  <footer id="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <span class="footer-wordmark">PurposeTask</span>
+        <span class="footer-domain">purposetask.org</span>
+      </div>
+      <p class="footer-legal">PurposeTask is organized as a North Carolina nonprofit corporation. Federal 501(c)(3) tax-exempt status is pending. This site does not solicit funds, accept donations, or create any financial obligation.</p>
+      <p class="footer-copyright">© 2026 PurposeTask™</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       MOBILE NAV TOGGLE (inline JS — only script on page)
+       ============================================================ -->
+  <script>
+    (function () {
+      var btn = document.getElementById('hamburger-btn');
+      var overlay = document.getElementById('nav-overlay');
+      var overlayLink = document.getElementById('nav-overlay-link');
+
+      function closeOverlay() {
+        overlay.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open navigation menu');
+      }
+
+      btn.addEventListener('click', function () {
+        var isOpen = overlay.classList.contains('open');
+        if (isOpen) {
+          closeOverlay();
+        } else {
+          overlay.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          btn.setAttribute('aria-label', 'Close navigation menu');
+        }
+      });
+
+      overlayLink.addEventListener('click', function () {
+        closeOverlay();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeOverlay();
+      });
+    })();
+  </script>
+
+</body>
+</html>
