@@ -1,0 +1,25 @@
+# PurposeTask
+
+> PurposeTask is a North Carolina nonprofit corporation building autonomous civic infrastructure that connects displaced workers, nonprofits, and outcome funders through verified community tasks.
+
+## Mission
+
+PurposeTask builds autonomous civic infrastructure for three participant types: [Taskers](https://purposetask.org/#interest), [Architects](https://purposetask.org/#interest), and [Sustainers](https://purposetask.org/#interest).
+
+## How It Works
+
+[Taskers](https://purposetask.org/#interest) are displaced workers earning income through community tasks.
+
+[Architects](https://purposetask.org/#interest) are nonprofits that define and post tasks.
+
+[Sustainers](https://purposetask.org/#interest) are donors who fund verified outcomes.
+
+PurposeTask uses AI-assisted matching and seven verification methods: geofence, AI vision, QR/NFC tap, peer review, time window, and digital artifact hash.
+
+PurposeTask maintains a tamper-resistant audit ledger where every dollar is mapped to a verified task, worker, and organization.
+
+Stripe Connect handles same-day payouts of $15–$100 per task.
+
+## Legal Status
+
+PurposeTask’s [federal 501(c)(3) tax-exempt status](https://purposetask.org/#legal) is pending, and the organization does not accept donations at this time.
