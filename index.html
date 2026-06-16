@@ -687,12 +687,15 @@
           <h2 class="section-headline">If this belongs in your world, reach out.</h2>
           <p class="section-subtext">We're beginning with focused conversations across community organizations, funders, civic leaders, and builders.</p>
           <form
-            class="contact-form"
-            action="mailto:info@purposetask.com"
-            method="POST"
-            enctype="text/plain"
-            aria-label="Contact form"
-          >
+  class="contact-form"
+  name="contact"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  aria-label="Contact form"
+>
+  <input type="hidden" name="form-name" value="contact" />
+  <p style="display:none"><input name="bot-field" /></p>
             <div class="form-field">
               <label for="field-name">Name <span aria-hidden="true">*</span></label>
               <input
