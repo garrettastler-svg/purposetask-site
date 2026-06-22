@@ -268,7 +268,10 @@
       line-height: var(--leading-display);
       letter-spacing: var(--tracking-display);
       color: var(--color-ink);
-      max-width: 800px;
+      /* Constrain to exactly 2 lines at all viewport widths */
+      max-width: 14ch;
+      overflow-wrap: break-word;
+      text-wrap: balance;
     }
 
     .hero-subtext {
@@ -636,7 +639,7 @@
     <section id="hero" aria-label="Hero">
       <div class="container">
         <div class="section-inner">
-          <h1 class="hero-headline">The people, the needs, and the funding.<br> <span style="color: #9B7D2E;">Together.</span></h1>
+          <h1 class="hero-headline">The people, the needs,<br>and the funding. <span style="color: #9B7D2E;">Together.</span></h1>
           <p class="hero-subtext">PurposeTask connects motivated workers, community nonprofits, and mission-driven funders through verified, paid community tasks. The workers, the need, and the funding are finally in the same place.</p>
         </div>
       </div>
@@ -687,13 +690,13 @@
               <p class="persona-body">Motivated workers with available capacity who complete skills-matched community tasks and receive same-day payment.</p>
             </div>
             <div class="persona-block">
-              <img src="images/sarah.jpg" alt="Sarah, Architect" style="width:72px; height:72px; border-radius:50%; object-fit:cover; object-position:top center; margin-bottom:12px; display:block;">
+              <img src="images/sarah.png" alt="Sarah, Architect" style="width:72px; height:72px; border-radius:50%; object-fit:cover; object-position:top center; margin-bottom:12px; display:block;">
               <p class="persona-label">Sarah: Architect</p>
               <p class="persona-body" style="font-style:italic; color: var(--color-ink); margin-bottom: 10px;">"I know exactly what needs doing. Now I have a system that finds the right people and records what they did."</p>
               <p class="persona-body">Nonprofits and community organizations that define tasks, match workers, and verify completed work.</p>
             </div>
             <div class="persona-block">
-              <img src="images/daniel.jpg" alt="Daniel, Sustainer" style="width:72px; height:72px; border-radius:50%; object-fit:cover; object-position:top center; margin-bottom:12px; display:block;">
+              <img src="images/daniel.png" alt="Daniel, Sustainer" style="width:72px; height:72px; border-radius:50%; object-fit:cover; object-position:top center; margin-bottom:12px; display:block;">
               <p class="persona-label">Daniel: Sustainer</p>
               <p class="persona-body" style="font-style:italic; color: var(--color-ink); margin-bottom: 10px;">"I want my dollars to do something real. PurposeTask shows me who worked, what they did, and where the money went."</p>
               <p class="persona-body">Funders who support verified outcomes with full transparency into where their dollars went and what work was completed.</p>
