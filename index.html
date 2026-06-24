@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BGW2RTX678"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BGW2RTX678', {
+      'send_page_view': true,
+      'cookie_flags': 'SameSite=None;Secure'
+    });
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="G-BGW2RTX678" />
+  <title>PurposeTask | Community Work. Verified Outcomes. Real Pay.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       PURPOSETASK — DESIGN TOKENS (Airbnb editorial + PT overrides)
+       ============================================================ */
+    :root {
+      --color-ink:        #2C2A26;
+      --color-canvas:     #ffffff;
+      --color-band:       #f5f1e9;
+      --color-wash:       #ebebeb;
+      --color-fog:        #6a6a6a;
+      --color-gold:       #9B7D2E;
+
+      --font-body: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* Type scale */
+      --text-display:     clamp(28px, 5vw, 64px);
+      --text-heading:     clamp(28px, 4vw, 48px);
+      --text-subheading:  22px;
+      --text-body:        18px;
+      --text-caption:     14px;
+      --text-copyright:   12px;
+
+      /* Leading */
+      --leading-display:  1.13;
+      --leading-heading:  1.18;
+      --leading-body:     1.56;
+      --leading-sub:      1.33;
+
+      /* Tracking */
+      --tracking-display: -0.03em;
+      --tracking-heading: -0.02em;
+      --tracking-sub:     -0.01em;
+
+      /* Spacing */
+      --space-8:  8px;
+      --space-16: 16px;
+      --space-24: 24px;
+      --space-32: 32px;
+      --space-40: 40px;
+      --space-48: 48px;
+      --space-64: 64px;
+
+      /* Layout */
+      --page-max:    1200px;
+      --copy-max:    640px;
+      --section-gap: 64px;
+
+      /* Radius */
+      --radius-btn:   8px;
+      --radius-media: 12px;
+    }
+
+    /* ============================================================
+       BASE RESET
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      -webkit-text-size-adjust: none;
+      text-size-adjust: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: var(--text-body);
+      color: var(--color-ink);
+      background: var(--color-canvas);
+      line-height: var(--leading-body);
+    }
+
+    img, video, iframe { display: block; max-width: 100%; }
+    input, button, textarea, select { font: inherit; color: inherit; }
+    h1, h2, h3, h4 { text-wrap: balance; }
+    p { text-wrap: pretty; }
+
+    :focus-visible {
+      outline: 2px solid var(--color-gold);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* ============================================================
+       SKIP LINK
+       ============================================================ */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: var(--space-16);
+      background: var(--color-ink);
+      color: #ffffff;
+      padding: var(--space-8) var(--space-16);
+      border-radius: var(--radius-btn);
+      font-size: var(--text-caption);
+      font-weight: 700;
+      z-index: 9999;
+      text-decoration: none;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: var(--space-16); }
+
+    /* ============================================================
+       SHARED LAYOUT HELPERS
+       ============================================================ */
+    .container {
+      max-width: var(--page-max);
+      margin-inline: auto;
+      padding-inline: var(--space-40);
+    }
+
+    .section-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: var(--space-24);
+    }
+
+    .section-headline {
+      font-size: var(--text-heading);
+      font-weight: 700;
+      line-height: var(--leading-heading);
+      letter-spacing: var(--tracking-heading);
+      color: var(--color-ink);
+    }
+
+    .section-subtext {
+      font-size: var(--text-body);
+      font-weight: 400;
+      line-height: var(--leading-body);
+      color: var(--color-ink);
+      max-width: var(--copy-max);
+    }
+
+    /* ============================================================
+       CTA BUTTON
+       ============================================================ */
+    .btn-cta {
+      display: inline-block;
+      background: var(--color-ink);
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1;
+      padding: 14px 24px;
+      border-radius: var(--radius-btn);
+      border: none;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+      white-space: nowrap;
+    }
+    .btn-cta:hover { opacity: 0.85; }
+    .btn-cta:active { opacity: 0.7; }
+
+    /* ============================================================
+       1. NAVIGATION
+       ============================================================ */
+    #site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-canvas);
+      border-bottom: 1px solid var(--color-ink);
+    }
+
+    .nav-inner {
+      max-width: var(--page-max);
+      margin-inline: auto;
+      padding-inline: var(--space-40);
+      padding-block: var(--space-40);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .wordmark {
+      font-size: 20px;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--color-gold);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-8);
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--color-ink);
+      border-radius: 2px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .nav-hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      top: 73px;
+      background: var(--color-canvas);
+      z-index: 99;
+      padding: var(--space-40);
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-24);
+    }
+    .nav-overlay.open { display: flex; }
+
+    /* ============================================================
+       2. HERO
+       ============================================================ */
+    #hero {
+      background: var(--color-canvas);
+      padding-block: var(--section-gap);
+    }
+
+    .hero-headline {
+      font-size: var(--text-display);
+      font-weight: 700;
+      line-height: var(--leading-display);
+      letter-spacing: var(--tracking-display);
+      color: var(--color-ink);
+      max-width: 800px;
+      text-wrap: unset;
+    }
+
+    .hero-subtext {
+      font-size: var(--text-body);
+      font-weight: 400;
+      line-height: var(--leading-body);
+      color: var(--color-ink);
+      max-width: var(--copy-max);
+    }
+
+    /* ============================================================
+       3. TEASER VIDEO
+       ============================================================ */
+    #video-section {
+      background: var(--color-canvas);
+      padding-block: 0 var(--section-gap);
+    }
+
+    .video-wrapper {
+      max-width: var(--page-max);
+      margin-inline: auto;
+      padding-inline: var(--space-40);
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: var(--radius-media);
+      border: 1px solid var(--color-ink);
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: var(--radius-media);
+    }
+
+    /* ============================================================
+       4. THE SHIFT (Band)
+       ============================================================ */
+    #the-shift {
+      background: var(--color-band);
+      padding-block: var(--section-gap);
+    }
+
+    /* ============================================================
+       5. THE GAP (Canvas)
+       ============================================================ */
+    #the-gap {
+      background: var(--color-canvas);
+      padding-block: var(--section-gap);
+    }
+
+    /* ============================================================
+       6. THE MODEL — THREE ROLES (Band)
+       ============================================================ */
+    #the-model {
+      background: var(--color-band);
+      padding-block: var(--section-gap);
+    }
+
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-24);
+      width: 100%;
+      margin-top: var(--space-8);
+    }
+
+    .persona-block {
+      background: var(--color-canvas);
+      border-radius: var(--radius-media);
+      padding: var(--space-24);
+      text-align: left;
+    }
+
+    .persona-label {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--color-ink);
+      margin-bottom: var(--space-8);
+      letter-spacing: var(--tracking-sub);
+      line-height: var(--leading-sub);
+    }
+
+    .persona-body {
+      font-size: var(--text-body);
+      font-weight: 400;
+      color: var(--color-fog);
+      line-height: var(--leading-body);
+    }
+
+    /* ============================================================
+       7. HOW IT WORKS — SYSTEM TILES (Canvas)
+       ============================================================ */
+    #the-thesis {
+      background: var(--color-canvas);
+      padding-block: var(--section-gap);
+    }
+
+    .system-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-24);
+      width: 100%;
+      margin-top: var(--space-8);
+    }
+
+    .system-tile {
+      background: var(--color-band);
+      border-radius: var(--radius-media);
+      padding: var(--space-24);
+      text-align: left;
+    }
+
+    .system-tile-label {
+      font-size: var(--text-caption);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-gold);
+      margin-bottom: var(--space-8);
+    }
+
+    .system-tile-headline {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-ink);
+      line-height: var(--leading-sub);
+      letter-spacing: var(--tracking-sub);
+      margin-bottom: var(--space-8);
+    }
+
+    .system-tile-body {
+      font-size: var(--text-caption);
+      font-weight: 400;
+      color: var(--color-fog);
+      line-height: var(--leading-body);
+    }
+
+    /* ============================================================
+       8. CONTACT FORM (Band)
+       ============================================================ */
+    #contact {
+      background: var(--color-band);
+      padding-block: var(--section-gap);
+    }
+
+    .contact-form {
+      width: 100%;
+      max-width: var(--copy-max);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-16);
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+
+    .form-field label {
+      font-size: var(--text-caption);
+      font-weight: 700;
+      color: var(--color-ink);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      background: var(--color-canvas);
+      border: 1px solid var(--color-ink);
+      border-radius: var(--radius-btn);
+      padding: 14px 16px;
+      font-size: var(--text-body);
+      font-weight: 400;
+      color: var(--color-ink);
+      line-height: var(--leading-body);
+      transition: border-color 0.15s ease;
+      resize: vertical;
+    }
+
+    .form-field input::placeholder,
+    .form-field textarea::placeholder {
+      color: var(--color-fog);
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      outline: none;
+      border-color: var(--color-gold);
+      box-shadow: 0 0 0 2px rgba(155, 125, 46, 0.18);
+    }
+
+    .form-submit {
+      margin-top: var(--space-8);
+    }
+
+    /* ============================================================
+       9. FOOTER
+       ============================================================ */
+    #site-footer {
+      background: #2C2A26;
+      padding-block: var(--section-gap);
+      color: var(--color-fog);
+    }
+
+    .footer-inner {
+      max-width: var(--page-max);
+      margin-inline: auto;
+      padding-inline: var(--space-40);
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-32);
+    }
+
+    .footer-wordmark {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+    }
+
+    .footer-domain {
+      font-size: var(--text-body);
+      font-weight: 400;
+      color: var(--color-fog);
+    }
+
+    .footer-legal {
+      font-size: var(--text-caption);
+      line-height: 1.6;
+      color: var(--color-fog);
+      text-align: center;
+      max-width: 680px;
+      margin-inline: auto;
+      margin-bottom: var(--space-16);
+    }
+
+    .footer-copyright {
+      font-size: var(--text-copyright);
+      color: var(--color-fog);
+      text-align: center;
+    }
+
+    /* ============================================================
+       MOBILE RESPONSIVE — 900px
+       ============================================================ */
+    @media (max-width: 900px) {
+      .persona-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .system-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-inner { padding-block: var(--space-24); }
+
+      .footer-top { flex-direction: column; gap: var(--space-16); align-items: flex-start; }
+    }
+
+    /* ============================================================
+       MOBILE RESPONSIVE — 640px
+       ============================================================ */
+    @media (max-width: 640px) {
+      .container { padding-inline: var(--space-24); }
+      .video-wrapper { padding-inline: var(--space-24); }
+      .nav-inner { padding-inline: var(--space-24); padding-block: var(--space-24); }
+      .footer-inner { padding-inline: var(--space-24); }
+
+      .nav-hamburger { display: flex; }
+
+      .nav-cta-desktop { display: none; }
+
+      .persona-block { text-align: left; }
+
+      .system-grid { grid-template-columns: 1fr; }
+
+      .btn-cta { width: 100%; text-align: center; }
+
+      .footer-top { flex-direction: column; gap: var(--space-16); align-items: flex-start; }
+    }
+
+    @media (min-width: 641px) {
+      .nav-hamburger { display: none; }
+    }
+  </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "NGO",
+      "@id": "https://purposetask.org/#organization",
+      "name": "PurposeTask",
+      "url": "https://purposetask.org",
+      "foundingDate": "2026",
+      "foundingLocation": {
+        "@type": "Place",
+        "name": "Charlotte, North Carolina, US"
+      },
+      "description": "PurposeTask is a North Carolina nonprofit corporation building autonomous civic infrastructure that connects displaced workers, nonprofits, and donors through verified community tasks.",
+      "knowsAbout": [
+        "civic infrastructure",
+        "community task coordination",
+        "impact philanthropy",
+        "workforce transition"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://purposetask.org/#website",
+      "name": "PurposeTask",
+      "url": "https://purposetask.org"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://purposetask.org/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is PurposeTask?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "PurposeTask is a North Carolina nonprofit corporation building autonomous civic infrastructure that connects displaced workers, nonprofits, and outcome funders through verified community tasks."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who can participate in the PurposeTask pilot program?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Taskers, Architects, and Sustainers can participate in PurposeTask: displaced workers earning income through community tasks, nonprofits that define and post tasks, and donors who fund verified outcomes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does PurposeTask accept donations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "PurposeTask's federal 501(c)(3) tax-exempt status is pending, and the organization does not accept donations at this time."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+  <!-- Skip to content -->
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- ============================================================
+       1. NAVIGATION
+       ============================================================ -->
+  <header id="site-nav">
+    <nav class="nav-inner" aria-label="PurposeTask navigation">
+      <a class="wordmark" href="/">PurposeTask</a>
+      <a class="btn-cta nav-cta-desktop" href="#contact">Get in touch</a>
+      <button
+        class="nav-hamburger"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="nav-overlay"
+        id="hamburger-btn"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile nav overlay -->
+  <div id="nav-overlay" class="nav-overlay" role="dialog" aria-modal="true" aria-label="Navigation">
+    <a class="btn-cta" href="#contact" id="nav-overlay-link">Get in touch</a>
+  </div>
+
+  <!-- ============================================================
+       MAIN
+       ============================================================ -->
+  <main id="main-content">
+
+    <!-- 2. HERO -->
+    <section id="hero" aria-label="Hero">
+      <div class="container">
+        <div class="section-inner">
+          <h1 class="hero-headline">The people, the needs,<br>and the funding. <span style="color: #9B7D2E;">Together.</span></h1>
+          <p class="hero-subtext">PurposeTask connects motivated workers, community nonprofits, and mission-driven funders through verified, paid community tasks. The workers, the need, and the funding are finally in the same place.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TEASER VIDEO -->
+    <section id="video-section" aria-label="PurposeTask teaser video">
+      <div class="video-wrapper">
+        <div class="video-container">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/T7HTqmNeLks"
+            title="PurposeTask teaser video"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEO TRANSCRIPT -->
+    <section id="video-transcript" aria-label="Video transcript" style="background: var(--color-canvas); padding-block: 0 var(--section-gap);">
+      <div class="video-wrapper">
+        <details style="border: 1px solid var(--color-wash); border-radius: var(--radius-media); padding: var(--space-24);">
+          <summary style="font-size: var(--text-caption); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; cursor: pointer; color: var(--color-fog);">Read transcript</summary>
+          <div style="margin-top: var(--space-16); font-size: var(--text-body); line-height: var(--leading-body); color: var(--color-ink); max-width: var(--copy-max);">
+            <p>In every town, there is work that isn't getting done. Not because no one cares, because the people, the money, and the need have never shared the same system.</p>
+            <p style="margin-top: 1em;">Marcus has a car, a phone, and a few open hours. He opens the task map, claims a shift at the food pantry 2 miles away, shows up, does the work, and gets paid before he gets home.</p>
+            <p style="margin-top: 1em;">The director of a small nonprofit, she knows exactly what needs doing. She's just been too busy to do it. PurposeTask gives her a task board, not another spreadsheet.</p>
+            <p style="margin-top: 1em;">And the person who funded Marcus' shift isn't waiting on a quarterly report. Trust is built when the work gets done. Task completed, worker paid, dollars accounted for.</p>
+            <p style="margin-top: 1em;">There's a new way to connect people and capital for work ahead.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- 4. THE MODEL — THREE ROLES -->
+    <section id="the-model" aria-label="The model">
+      <div class="container">
+        <div class="section-inner">
+          <h2 class="section-headline">Three roles. Work that verifies itself.</h2>
+          <div class="persona-grid">
+            <div class="persona-block">
+              <img src="images/marcus.png" alt="Marcus, Tasker" style="width:72px; height:72px; border-radius:50%; object-fit:cover; object-position:top center; margin-bottom:12px; display:block;">
+              <p class="persona-label">Marcus: Tasker</p>
+              <p class="persona-body" style="font-style:italic; color: var(--color-ink); margin-bottom: 10px;">"I claimed a shift at the food pantry two miles away, showed up, did the work, and got paid before I got home."</p>
+              <p class="persona-body">Motivated workers with available capacity who complete skills-matched community tasks and receive same-day payment.</p>
+            </div>
+            <div class="persona-block">
+              <img src="images/sarah.png" alt="Sarah, Architect" style="width:72px; height:72px; border-radius:50%; object-fit:cover; object-position:top center; margin-bottom:12px; display:block;">
+              <p class="persona-label">Sarah: Architect</p>
+              <p class="persona-body" style="font-style:italic; color: var(--color-ink); margin-bottom: 10px;">"I know exactly what needs doing. Now I have a system that finds the right people and records what they did."</p>
+              <p class="persona-body">Nonprofits and community organizations that define tasks, match workers, and verify completed work.</p>
+            </div>
+            <div class="persona-block">
+              <img src="images/daniel.png" alt="Daniel, Sustainer" style="width:72px; height:72px; border-radius:50%; object-fit:cover; object-position:top center; margin-bottom:12px; display:block;">
+              <p class="persona-label">Daniel: Sustainer</p>
+              <p class="persona-body" style="font-style:italic; color: var(--color-ink); margin-bottom: 10px;">"I want my dollars to do something real. PurposeTask shows me who worked, what they did, and where the money went."</p>
+              <p class="persona-body">Funders who support verified outcomes with full transparency into where their dollars went and what work was completed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. HOW IT WORKS -->
+    <section id="the-thesis" aria-label="How it works">
+      <div class="container">
+        <div class="section-inner">
+          <h2 class="section-headline">Four systems. One closed loop.</h2>
+          <p class="section-subtext">Every task runs through the same infrastructure. The work gets surfaced, the right person gets matched, completion gets verified, and payment clears the same day.</p>
+          <div class="system-grid">
+
+            <div class="system-tile">
+              <p class="system-tile-label">Need Surfacing</p>
+              <p class="system-tile-headline">Tasks exist before anyone posts them.</p>
+              <p class="system-tile-body">Architects define structured tasks with clear scope and pay. When patterns emerge, the system flags recurring needs autonomously. Work that would stay invisible gets a place in the queue.</p>
+            </div>
+
+            <div class="system-tile">
+              <p class="system-tile-label">Matching Engine</p>
+              <p class="system-tile-headline">The right worker. Not just the nearest one.</p>
+              <p class="system-tile-body">Matches weigh skills, proximity, tier, availability, and community standing. A worker with the wrong profile never sees the task. A worker with the right one sees it first.</p>
+            </div>
+
+            <div class="system-tile">
+              <p class="system-tile-label">Task Verification</p>
+              <p class="system-tile-headline">Completion has to be proven, not reported.</p>
+              <p class="system-tile-body">AI vision, geo-fencing, QR codes, NFC, peer review, time windows, and artifact submission all serve the same purpose: a funder gets a record that holds up, not just a confirmation email.</p>
+            </div>
+
+            <div class="system-tile">
+              <p class="system-tile-label">Fund Routing</p>
+              <p class="system-tile-headline">Dollars move when the work is done.</p>
+              <p class="system-tile-body">Pooled and earmarked funds sit in escrow until verification clears. Same-day worker payment follows automatically. Every transaction posts to a double-entry audit ledger the donor can read.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CONTACT FORM -->
+    <section id="contact" aria-label="Contact PurposeTask">
+      <div class="container">
+        <div class="section-inner">
+          <h2 class="section-headline">If this belongs in your world, reach out.</h2>
+          <p class="section-subtext">We're beginning with focused conversations across community organizations, funders, civic leaders, and builders.</p>
+          <form
+  class="contact-form"
+  name="contact"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  aria-label="Contact form"
+>
+  <input type="hidden" name="form-name" value="contact" />
+  <p style="display:none"><input name="bot-field" /></p>
+            <div class="form-field">
+              <label for="field-name">Name <span aria-hidden="true">*</span></label>
+              <input
+                type="text"
+                id="field-name"
+                name="Name"
+                required
+                autocomplete="name"
+                placeholder="Your name"
+              >
+            </div>
+            <div class="form-field">
+              <label for="field-email">Email <span aria-hidden="true">*</span></label>
+              <input
+                type="email"
+                id="field-email"
+                name="Email"
+                required
+                autocomplete="email"
+                placeholder="you@organization.org"
+              >
+            </div>
+            <div class="form-field">
+              <label for="field-org">Organization</label>
+              <input
+                type="text"
+                id="field-org"
+                name="Organization"
+                autocomplete="organization"
+                placeholder="Your organization (optional)"
+              >
+            </div>
+            <div class="form-field">
+              <label for="field-message">Message</label>
+              <textarea
+                id="field-message"
+                name="Message"
+                rows="5"
+                placeholder="Tell us how you'd like to be involved"
+              ></textarea>
+            </div>
+            <div class="form-submit">
+              <button type="submit" class="btn-cta">Get in touch</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       9. FOOTER
+       ============================================================ -->
+  <footer id="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <span class="footer-wordmark">PurposeTask</span>
+        <span class="footer-domain">purposetask.org</span>
+      </div>
+      <p class="footer-legal">PurposeTask is organized as a North Carolina nonprofit corporation. Federal 501(c)(3) tax-exempt status is pending. This site does not solicit funds, accept donations, or create any financial obligation.</p>
+      <p class="footer-copyright">&copy; 2026 PurposeTask&trade;</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       MOBILE NAV TOGGLE (inline JS — only script on page)
+       ============================================================ -->
+  <script>
+    (function () {
+      var btn = document.getElementById('hamburger-btn');
+      var overlay = document.getElementById('nav-overlay');
+      var overlayLink = document.getElementById('nav-overlay-link');
+
+      function closeOverlay() {
+        overlay.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open navigation menu');
+      }
+
+      btn.addEventListener('click', function () {
+        var isOpen = overlay.classList.contains('open');
+        if (isOpen) {
+          closeOverlay();
+        } else {
+          overlay.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          btn.setAttribute('aria-label', 'Close navigation menu');
+        }
+      });
+
+      overlayLink.addEventListener('click', function () {
+        closeOverlay();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeOverlay();
+      });
+    })();
+  </script>
+
+</body>
+</html>
